@@ -1,10 +1,17 @@
 "use client";
 
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
 const breathStops = [0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84, 1];
 
 export default function ScrollBreathRail() {
+  const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 105,
@@ -46,24 +53,35 @@ export default function ScrollBreathRail() {
 
   return (
     <aside className="scroll-breath-rail" aria-hidden="true">
-      <motion.span className="scroll-rail-label scroll-rail-pressure" style={{ opacity: pressureOpacity }}>
+      <motion.span
+        className="scroll-rail-label scroll-rail-pressure"
+        style={{ opacity: reduceMotion ? 1 : pressureOpacity }}
+      >
         Pressure
       </motion.span>
 
-      <motion.div className="scroll-rail-lines" style={{ gap: lineGap }}>
-        <motion.span className="scroll-rail-highlight" style={{ y: highlightY }} />
+      <motion.div
+        className="scroll-rail-lines"
+        style={{ gap: reduceMotion ? "0.62rem" : lineGap }}
+      >
+        {!reduceMotion && (
+          <motion.span className="scroll-rail-highlight" style={{ y: highlightY }} />
+        )}
         {Array.from({ length: 10 }).map((_, index) => (
           <motion.i
             key={index}
             style={{
               width: `${40 + index * 6}%`,
-              scaleX: lineScale,
+              scaleX: reduceMotion ? 1 : lineScale,
             }}
           />
         ))}
       </motion.div>
 
-      <motion.span className="scroll-rail-label scroll-rail-release" style={{ opacity: releaseOpacity }}>
+      <motion.span
+        className="scroll-rail-label scroll-rail-release"
+        style={{ opacity: reduceMotion ? 1 : releaseOpacity }}
+      >
         Release
       </motion.span>
       <span className="scroll-rail-cue">Scroll to exhale</span>
