@@ -49,6 +49,12 @@ const services = [
 export default function ServiceExplorer() {
   const [active, setActive] = useState<number | null>(0);
 
+  function enquire(serviceName: string) {
+    window.dispatchEvent(
+      new CustomEvent("project-exhale:interest", { detail: serviceName }),
+    );
+  }
+
   return (
     <div className="service-explorer">
       {services.map((service, index) => {
@@ -101,7 +107,11 @@ export default function ServiceExplorer() {
                       <p className="service-framework-note">
                         The work can draw from Regulate, Recover, Energise and Align depending on the context and what your people need.
                       </p>
-                      <a href="#contact" className="service-enquire-link">
+                      <a
+                        href="#contact"
+                        className="service-enquire-link"
+                        onClick={() => enquire(service.name)}
+                      >
                         Enquire about {service.name.toLowerCase()} <span aria-hidden="true">→</span>
                       </a>
                     </div>
