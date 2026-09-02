@@ -1,0 +1,265 @@
+/* Project Exhale — readability + breathing rail refinement */
+
+/* Readability: keep the atmosphere, remove the murk. */
+.desktop-nav {
+  color: rgba(235, 231, 222, 0.88);
+}
+
+.hero-intro,
+.section-heading > p:last-child,
+.framework-row > p,
+.work-intro > p:last-child,
+.service-row p,
+.jo-copy > p,
+.contact-details > p,
+.hero-quote,
+footer p {
+  color: rgba(235, 231, 222, 0.79);
+}
+
+.hero-quote {
+  color: rgba(235, 231, 222, 0.9);
+}
+
+.hero-quote cite,
+.framework-name-wrap span,
+.jo-image-caption,
+.contact-phone {
+  color: rgba(235, 231, 222, 0.72);
+}
+
+.statement-copy p,
+.audience-line span {
+  color: rgba(17, 23, 21, 0.79);
+}
+
+.eyebrow {
+  color: #b5c5af;
+}
+
+/* Pressure -> release becomes a breathing instrument, not decoration. */
+.pressure-meter {
+  position: fixed;
+  top: calc(50svh - 162px);
+  right: 2.3vw;
+  z-index: 42;
+  width: 7.8rem;
+  padding: 1.1rem 0.95rem 1.15rem;
+  border-left: 1px solid rgba(235, 231, 222, 0.1);
+  background: linear-gradient(90deg, rgba(7, 10, 9, 0), rgba(7, 10, 9, 0.34));
+  filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.18));
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+.pressure-meter::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0.8rem;
+  bottom: 0.8rem;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(168, 185, 162, 0.48) 22%,
+    rgba(235, 231, 222, 0.28) 50%,
+    rgba(168, 185, 162, 0.48) 78%,
+    transparent
+  );
+  opacity: 0.7;
+}
+
+.meter-label {
+  color: rgba(235, 231, 222, 0.86);
+  font-size: 0.63rem;
+  font-weight: 650;
+  letter-spacing: 0.27em;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.55);
+}
+
+.meter-top {
+  margin-bottom: 1.05rem;
+}
+
+.meter-bottom {
+  margin-top: 1.05rem;
+}
+
+.meter-lines {
+  position: relative;
+  gap: 0.62rem;
+  overflow: hidden;
+  padding-block: 0.15rem;
+  animation: exhale-stack 8.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.meter-lines::after {
+  content: "";
+  position: absolute;
+  left: -15%;
+  top: -18%;
+  width: 135%;
+  height: 2.4rem;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(168, 185, 162, 0.2),
+    rgba(235, 231, 222, 0.42),
+    rgba(168, 185, 162, 0.16),
+    transparent
+  );
+  filter: blur(3px);
+  opacity: 0.7;
+  animation: exhale-travel 8.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.meter-lines i {
+  height: 1px;
+  background: rgba(235, 231, 222, 0.66);
+  box-shadow: 0 0 12px rgba(168, 185, 162, 0.035);
+  transform-origin: left center;
+  animation: exhale-line 8.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.meter-lines i:nth-child(2n) {
+  animation-delay: -0.15s;
+}
+
+.meter-lines i:nth-child(3n) {
+  animation-delay: -0.3s;
+}
+
+.scroll-cue {
+  margin-top: 1.55rem;
+  color: rgba(235, 231, 222, 0.76);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.55);
+  animation: cue-breathe 8.5s ease-in-out infinite;
+}
+
+@keyframes exhale-line {
+  0%, 100% {
+    transform: scaleX(0.92);
+    opacity: 0.58;
+  }
+  45% {
+    transform: scaleX(1.06);
+    opacity: 0.92;
+  }
+  58% {
+    transform: scaleX(1.06);
+    opacity: 0.92;
+  }
+}
+
+@keyframes exhale-stack {
+  0%, 100% { gap: 0.58rem; }
+  45%, 58% { gap: 0.78rem; }
+}
+
+@keyframes exhale-travel {
+  0% {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  18% { opacity: 0.5; }
+  52% { opacity: 0.8; }
+  82% { opacity: 0.42; }
+  100% {
+    transform: translateY(390%);
+    opacity: 0;
+  }
+}
+
+@keyframes cue-breathe {
+  0%, 100% { opacity: 0.56; }
+  48%, 58% { opacity: 0.9; }
+}
+
+/* Progressive enhancement: the rail gradually releases as the page moves on. */
+@supports (animation-timeline: scroll()) {
+  .pressure-meter {
+    animation-name: rail-scroll-life;
+    animation-duration: 1ms;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root block);
+    animation-range: 0% 34%;
+  }
+
+  @keyframes rail-scroll-life {
+    0% {
+      opacity: 0.98;
+      filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.18));
+    }
+    55% {
+      opacity: 0.9;
+    }
+    82% {
+      opacity: 0.52;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+/* Preserve the cinematic portrait while making adjacent copy easier to read. */
+.portrait-shade {
+  background:
+    linear-gradient(90deg, #070a09 0%, rgba(7, 10, 9, 0.67) 23%, rgba(7, 10, 9, 0.12) 61%, transparent 78%),
+    linear-gradient(0deg, rgba(7, 10, 9, 0.5), transparent 42%);
+}
+
+.hero-copy {
+  text-shadow: 0 1px 26px rgba(0, 0, 0, 0.12);
+}
+
+/* Tablet: keep the idea but reduce its visual footprint. */
+@media (max-width: 1100px) {
+  .pressure-meter {
+    right: 1.25rem;
+    width: 6.3rem;
+    padding-inline: 0.72rem;
+  }
+
+  .meter-label {
+    font-size: 0.57rem;
+    letter-spacing: 0.2em;
+  }
+
+  .scroll-cue {
+    font-size: 0.49rem;
+    letter-spacing: 0.16em;
+  }
+}
+
+/* On small phones it would cover content; the main EXHALE motion carries the idea instead. */
+@media (max-width: 760px) {
+  .pressure-meter {
+    display: none;
+  }
+
+  .hero-intro,
+  .section-heading > p:last-child,
+  .framework-row > p,
+  .work-intro > p:last-child,
+  .service-row p,
+  .jo-copy > p,
+  .contact-details > p {
+    color: rgba(235, 231, 222, 0.84);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meter-lines,
+  .meter-lines i,
+  .meter-lines::after,
+  .scroll-cue,
+  .pressure-meter {
+    animation: none !important;
+  }
+}
