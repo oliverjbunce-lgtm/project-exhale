@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import ContactForm from "./ContactForm";
+import MobileNav from "./MobileNav";
 import ServiceExplorer from "./ServiceExplorer";
 
 const framework = [
@@ -63,6 +64,7 @@ const credibility = [
 ];
 
 export default function Home() {
+  const reduceMotion = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -96,6 +98,8 @@ export default function Home() {
         <a className="header-cta" href="#contact">
           Start a conversation
         </a>
+
+        <MobileNav />
       </header>
 
       <section ref={heroRef} id="top" className="hero-section">
@@ -103,7 +107,10 @@ export default function Home() {
 
         <motion.div
           className="hero-copy"
-          style={{ y: heroTextY, opacity: heroOpacity }}
+          style={{
+            y: reduceMotion ? 0 : heroTextY,
+            opacity: reduceMotion ? 1 : heroOpacity,
+          }}
         >
           <p className="eyebrow">Science-based human performance</p>
           <h1>
@@ -128,7 +135,10 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <motion.div className="hero-portrait" style={{ y: heroImageY }}>
+        <motion.div
+          className="hero-portrait"
+          style={{ y: reduceMotion ? 0 : heroImageY }}
+        >
           <div className="portrait-shade" />
           <img
             src="https://images.squarespace-cdn.com/content/v1/6a376da1a775186cb973ccf4/4282b65c-4db7-4cd9-81d9-de2b4f12354f/JoeGoPhoto-94.jpg"
@@ -136,7 +146,10 @@ export default function Home() {
           />
         </motion.div>
 
-        <motion.blockquote className="hero-quote" style={{ opacity: heroOpacity }}>
+        <motion.blockquote
+          className="hero-quote"
+          style={{ opacity: reduceMotion ? 1 : heroOpacity }}
+        >
           <span className="quote-mark">“</span>
           Our nervous system influences every conversation, every decision and
           every leadership moment. Learning to regulate it changes everything.
@@ -144,7 +157,11 @@ export default function Home() {
         </motion.blockquote>
 
         <div className="hero-exhale" aria-hidden="true">
-          <motion.span style={{ letterSpacing: exhaleSpacing }}>EXHALE</motion.span>
+          <motion.span
+            style={{ letterSpacing: reduceMotion ? "0.22em" : exhaleSpacing }}
+          >
+            EXHALE
+          </motion.span>
         </div>
       </section>
 
@@ -195,10 +212,10 @@ export default function Home() {
             <motion.article
               key={item.number}
               className="framework-row"
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <span className="framework-number">{item.number}</span>
               <div className="framework-name-wrap">
