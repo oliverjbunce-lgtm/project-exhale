@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import ContactForm from "./ContactForm";
 
 const framework = [
   {
@@ -60,6 +61,29 @@ const audiences = [
   "Education & schools",
 ];
 
+const credibility = [
+  {
+    value: "20+",
+    title: "Years in health & performance",
+    body: "Two decades of experience translating health and performance science into practical change for real people.",
+  },
+  {
+    value: "Physio",
+    title: "Clinical foundation",
+    body: "A physiotherapy background keeps the work grounded in how people actually function under stress and load.",
+  },
+  {
+    value: "4",
+    title: "Integrated performance shifts",
+    body: "Regulate, Recover, Energise and Align are designed to work together rather than as isolated wellbeing tips.",
+  },
+  {
+    value: "NZ",
+    title: "Christchurch · nationwide",
+    body: "Speaking, workshops, leadership development and coaching for organisations across New Zealand.",
+  },
+];
+
 export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -69,7 +93,6 @@ export default function Home() {
 
   const heroTextY = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const heroImageY = useTransform(scrollYProgress, [0, 1], [0, 45]);
-  const pressureScale = useTransform(scrollYProgress, [0, 0.85], [0.72, 1]);
   const exhaleSpacing = useTransform(
     scrollYProgress,
     [0, 0.85],
@@ -125,20 +148,6 @@ export default function Home() {
               Bring Exhale to your team <span aria-hidden="true">→</span>
             </a>
           </div>
-        </motion.div>
-
-        <motion.div className="pressure-meter" style={{ scaleX: pressureScale }}>
-          <span className="meter-label meter-top">Pressure</span>
-          <div className="meter-lines" aria-hidden="true">
-            {Array.from({ length: 10 }).map((_, index) => (
-              <i
-                key={index}
-                style={{ width: `${42 + index * 6}%` }}
-              />
-            ))}
-          </div>
-          <span className="meter-label meter-bottom">Release</span>
-          <span className="scroll-cue">Scroll to exhale</span>
         </motion.div>
 
         <motion.div className="hero-portrait" style={{ y: heroImageY }}>
@@ -219,9 +228,7 @@ export default function Home() {
                 <span>{item.label}</span>
               </div>
               <p>{item.body}</p>
-              <span className="framework-arrow" aria-hidden="true">
-                ↗
-              </span>
+              <span className="framework-arrow" aria-hidden="true">↗</span>
             </motion.article>
           ))}
         </div>
@@ -243,9 +250,7 @@ export default function Home() {
               <span className="service-number">{service.number}</span>
               <h3>{service.name}</h3>
               <p>{service.body}</p>
-              <span className="service-arrow" aria-hidden="true">
-                →
-              </span>
+              <span className="service-arrow" aria-hidden="true">→</span>
             </a>
           ))}
         </div>
@@ -292,6 +297,30 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="credibility-section" aria-labelledby="credibility-title">
+        <div className="credibility-heading">
+          <div>
+            <p className="eyebrow">Experience behind the work</p>
+            <h2 id="credibility-title">Grounded in more than a good idea.</h2>
+          </div>
+          <p>
+            Project Exhale brings together clinical experience, performance
+            education and practical tools that are designed to make sense in the
+            middle of a real working day.
+          </p>
+        </div>
+
+        <div className="credibility-grid">
+          {credibility.map((item) => (
+            <article className="credibility-item" key={item.title}>
+              <span className="credibility-value">{item.value}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="closing-statement">
         <p className="eyebrow">Pressure will always exist</p>
         <h2>
@@ -301,24 +330,22 @@ export default function Home() {
         </h2>
       </section>
 
-      <section id="contact" className="contact-section">
+      <section id="contact" className="contact-section contact-with-form">
         <div>
           <p className="eyebrow">Christchurch · Working nationwide</p>
           <h2>Start the conversation.</h2>
-        </div>
-        <div className="contact-details">
-          <p>
+          <p className="contact-intro-copy">
             Looking for a keynote, workshop, leadership programme or one-to-one
             coaching? Tell Jo what is happening in your team and what you would
             like to change.
           </p>
-          <a className="contact-email" href="mailto:jo@project-exhale.co.nz">
-            jo@project-exhale.co.nz <span aria-hidden="true">↗</span>
-          </a>
-          <a className="contact-phone" href="tel:+64211163063">
-            021 116 3063
-          </a>
+          <div className="direct-contact">
+            <a href="mailto:jo@project-exhale.co.nz">jo@project-exhale.co.nz ↗</a>
+            <a href="tel:+64211163063">021 116 3063</a>
+          </div>
         </div>
+
+        <ContactForm />
       </section>
 
       <footer>
