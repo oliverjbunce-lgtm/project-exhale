@@ -2,16 +2,17 @@
 
 .service-explorer {
   margin-top: 4.5rem;
-  border-top: 1px solid rgba(17, 23, 21, 0.22);
+  border-top: 1px solid rgba(235, 231, 222, 0.24);
 }
 
 .service-explorer-item {
-  border-bottom: 1px solid rgba(17, 23, 21, 0.18);
-  transition: background 280ms ease;
+  border-bottom: 1px solid rgba(235, 231, 222, 0.18);
+  transition: background 280ms ease, border-color 280ms ease;
 }
 
 .service-explorer-item.is-open {
-  background: rgba(101, 121, 99, 0.055);
+  background: rgba(127, 149, 124, 0.09);
+  border-bottom-color: rgba(168, 185, 162, 0.32);
 }
 
 .service-explorer-trigger {
@@ -20,17 +21,18 @@
   grid-template-columns: 4.5rem minmax(0, 1fr) 3rem;
   gap: 1.5rem;
   align-items: start;
-  padding: 2rem 0;
+  padding: 2.2rem 0;
   border: 0;
   background: transparent;
-  color: #111715;
+  color: var(--ivory);
   text-align: left;
   cursor: pointer;
 }
 
 .service-explorer-trigger .service-number {
-  padding-top: 0.25rem;
-  color: #657963;
+  padding-top: 0.3rem;
+  color: var(--sage-bright);
+  opacity: 0.96;
 }
 
 .service-explorer-title-wrap {
@@ -41,8 +43,10 @@
 }
 
 .service-explorer-title {
+  color: #f3efe7;
   font-family: var(--serif);
   font-size: clamp(2.2rem, 3.4vw, 4.2rem);
+  font-weight: 400;
   line-height: 0.96;
   letter-spacing: -0.035em;
 }
@@ -50,32 +54,36 @@
 .service-explorer-summary {
   max-width: 34rem;
   padding-top: 0.25rem;
-  color: rgba(17, 23, 21, 0.72);
-  font-size: 0.98rem;
-  line-height: 1.68;
+  color: rgba(243, 239, 231, 0.82);
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
 .service-explorer-toggle {
   justify-self: end;
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.35rem;
+  height: 2.35rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(17, 23, 21, 0.24);
+  border: 1px solid rgba(235, 231, 222, 0.32);
   border-radius: 50%;
-  color: #657963;
+  color: var(--sage-bright);
   font-family: var(--serif);
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   line-height: 1;
   transition: border-color 220ms ease, background 220ms ease, color 220ms ease;
 }
 
 .service-explorer-trigger:hover .service-explorer-toggle,
 .service-explorer-item.is-open .service-explorer-toggle {
-  border-color: #657963;
-  background: #657963;
-  color: #f0ece4;
+  border-color: var(--sage-bright);
+  background: var(--sage-bright);
+  color: #0a0e0c;
+}
+
+.service-explorer-trigger:hover .service-explorer-title {
+  color: #ffffff;
 }
 
 .service-explorer-panel {
@@ -86,7 +94,7 @@
   display: grid;
   grid-template-columns: 4.5rem minmax(0, 0.72fr) minmax(18rem, 1.28fr) 3rem;
   gap: 1.5rem;
-  padding: 0.5rem 0 2.8rem;
+  padding: 0.35rem 0 3rem;
 }
 
 .service-explorer-meta {
@@ -98,22 +106,22 @@
 
 .service-explorer-meta div {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
 
 .service-explorer-meta span {
-  color: #657963;
-  font-size: 0.61rem;
-  font-weight: 700;
+  color: var(--sage-bright);
+  font-size: 0.63rem;
+  font-weight: 750;
   letter-spacing: 0.17em;
   text-transform: uppercase;
 }
 
 .service-explorer-meta strong {
-  color: rgba(17, 23, 21, 0.88);
-  font-size: 0.82rem;
+  color: rgba(243, 239, 231, 0.94);
+  font-size: 0.86rem;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .service-explorer-detail {
@@ -123,29 +131,33 @@
 
 .service-explorer-detail > p {
   margin: 0;
-  color: rgba(17, 23, 21, 0.78);
+  color: rgba(243, 239, 231, 0.86);
   font-size: 1rem;
-  line-height: 1.76;
+  line-height: 1.78;
 }
 
 .service-framework-note {
-  margin-top: 1rem !important;
+  margin-top: 1.15rem !important;
   padding-left: 1rem;
-  border-left: 1px solid rgba(101, 121, 99, 0.45);
-  color: rgba(17, 23, 21, 0.62) !important;
-  font-size: 0.86rem !important;
+  border-left: 1px solid rgba(168, 185, 162, 0.58);
+  color: rgba(243, 239, 231, 0.72) !important;
+  font-size: 0.87rem !important;
 }
 
 .service-enquire-link {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  margin-top: 1.65rem;
-  color: #52664f;
-  font-size: 0.68rem;
+  margin-top: 1.8rem;
+  color: #b7c8b1;
+  font-size: 0.69rem;
   font-weight: 750;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.service-enquire-link:hover {
+  color: #e7eee3;
 }
 
 .service-enquire-link span {
@@ -163,7 +175,7 @@
 
   .service-explorer-title-wrap {
     grid-template-columns: 1fr;
-    gap: 0.8rem;
+    gap: 0.9rem;
   }
 
   .service-explorer-summary {
@@ -193,7 +205,7 @@
   .service-explorer-trigger {
     grid-template-columns: 2.2rem minmax(0, 1fr) 2.2rem;
     gap: 0.75rem;
-    padding: 1.55rem 0;
+    padding: 1.65rem 0;
   }
 
   .service-explorer-title {
@@ -201,13 +213,14 @@
   }
 
   .service-explorer-summary {
-    font-size: 0.9rem;
+    color: rgba(243, 239, 231, 0.84);
+    font-size: 0.92rem;
   }
 
   .service-explorer-panel-inner {
     grid-template-columns: 2.2rem minmax(0, 1fr) 2.2rem;
     gap: 0.75rem;
-    padding-bottom: 2.2rem;
+    padding-bottom: 2.3rem;
   }
 
   .service-explorer-meta {
