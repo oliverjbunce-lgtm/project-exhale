@@ -1,10 +1,10 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 const interests = [
   "Conference speaking",
-  "Workplace workshop",
+  "Workplace workshops",
   "Leadership development",
   "Executive coaching",
   "Not sure yet",
@@ -13,6 +13,20 @@ const interests = [
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "fallback">("idle");
   const [fallbackHref, setFallbackHref] = useState("mailto:jo@project-exhale.co.nz");
+  const [interest, setInterest] = useState("");
+
+  useEffect(() => {
+    function handleInterest(event: Event) {
+      const detail = (event as CustomEvent<string>).detail;
+      if (interests.includes(detail)) {
+        setInterest(detail);
+        setStatus("idle");
+      }
+    }
+
+    window.addEventListener("project-exhale:interest", handleInterest);
+    return () => window.removeEventListener("project-exhale:interest", handleInterest);
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -48,6 +62,7 @@ export default function ContactForm() {
       }
 
       event.currentTarget.reset();
+      setInterest("");
       setStatus("sent");
     } catch {
       setStatus("fallback");
@@ -74,10 +89,15 @@ export default function ContactForm() {
         </label>
         <label>
           <span>Interested in</span>
-          <select name="interest" defaultValue="" required>
+          <select
+            name="interest"
+            value={interest}
+            onChange={(event) => setInterest(event.target.value)}
+            required
+          >
             <option value="" disabled>Select an option</option>
-            {interests.map((interest) => (
-              <option key={interest} value={interest}>{interest}</option>
+            {interests.map((item) => (
+              <option key={item} value={item}>{item}</option>
             ))}
           </select>
         </label>
