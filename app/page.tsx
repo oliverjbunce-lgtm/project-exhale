@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import ContactForm from "./ContactForm";
+import ServiceExplorer from "./ServiceExplorer";
 
 const framework = [
   {
@@ -28,29 +29,6 @@ const framework = [
     name: "Align",
     label: "Lead from what matters",
     body: "Values-led action for stronger boundaries, greater clarity and performance that remains sustainable.",
-  },
-];
-
-const services = [
-  {
-    number: "01",
-    name: "Conference speaking",
-    body: "45–60 minute keynotes that turn evidence into practical actions people can use immediately.",
-  },
-  {
-    number: "02",
-    name: "Workplace workshops",
-    body: "Interactive sessions for teams wanting better tools for stress, recovery, resilience and performance.",
-  },
-  {
-    number: "03",
-    name: "Leadership development",
-    body: "Programmes for leaders who want clearer decisions, healthier team cultures and sustainable performance.",
-  },
-  {
-    number: "04",
-    name: "Executive coaching",
-    body: "One-to-one coaching shaped around the pressure, priorities and performance demands of individual leaders.",
   },
 ];
 
@@ -244,16 +222,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="service-list">
-          {services.map((service) => (
-            <a key={service.number} href="#contact" className="service-row">
-              <span className="service-number">{service.number}</span>
-              <h3>{service.name}</h3>
-              <p>{service.body}</p>
-              <span className="service-arrow" aria-hidden="true">→</span>
-            </a>
-          ))}
-        </div>
+        <ServiceExplorer />
       </section>
 
       <section id="jo" className="jo-section">
