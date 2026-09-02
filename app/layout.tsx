@@ -6,6 +6,7 @@ import "./rail-fix.css";
 import "./scroll-rail.css";
 import "./phase3.css";
 import "./services.css";
+import "./qa.css";
 import ScrollBreathRail from "./ScrollBreathRail";
 
 export const metadata: Metadata = {
