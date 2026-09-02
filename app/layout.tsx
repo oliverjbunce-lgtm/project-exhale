@@ -3,6 +3,8 @@ import "./globals.css";
 import "./v2.css";
 import "./refinement.css";
 import "./rail-fix.css";
+import "./scroll-rail.css";
+import ScrollBreathRail from "./ScrollBreathRail";
 
 export const metadata: Metadata = {
   title: "Project Exhale | Science-based human performance",
@@ -17,7 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ScrollBreathRail />
+        {children}
+      </body>
     </html>
   );
 }
