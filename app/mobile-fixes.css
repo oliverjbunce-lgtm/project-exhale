@@ -1,0 +1,113 @@
+/* Project Exhale — targeted mobile repairs
+   Keep the stable desktop design untouched while correcting two mobile-only issues. */
+
+@media (max-width: 900px) {
+  /* Hero portrait: on smaller screens the image should read as a real portrait,
+     not as a dark/green atmospheric background. */
+  .hero-portrait {
+    background: #0b100e;
+  }
+
+  .hero-portrait img {
+    filter: saturate(0.94) contrast(1.02) brightness(0.98) !important;
+  }
+
+  .portrait-shade {
+    display: none !important;
+    background: none !important;
+  }
+
+  /* Statement section: force normal document flow so no heading/copy can overlap. */
+  .statement-section {
+    display: block !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
+  .statement-section .eyebrow {
+    position: static !important;
+    display: block !important;
+    margin: 0 0 1.1rem !important;
+    transform: none !important;
+  }
+
+  .statement-grid {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+  }
+
+  .statement-grid h2 {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 12ch !important;
+    margin: 0 0 2rem !important;
+    padding: 0 !important;
+    transform: none !important;
+    font-size: clamp(3.15rem, 8.5vw, 5rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.035em !important;
+    overflow-wrap: normal;
+  }
+
+  .statement-copy {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 38rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+
+  .statement-copy p {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    font-size: 1rem !important;
+    line-height: 1.72 !important;
+  }
+
+  .statement-copy p + p {
+    margin-top: 1.15rem !important;
+  }
+
+  .audience-line {
+    clear: both;
+    position: static !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-portrait img {
+    object-position: 50% 22% !important;
+    filter: saturate(1) contrast(1.01) brightness(1) !important;
+  }
+
+  .statement-section {
+    padding-top: 4.8rem !important;
+    padding-bottom: 4.8rem !important;
+  }
+
+  .statement-grid h2 {
+    max-width: 10.5ch !important;
+    margin-bottom: 1.75rem !important;
+    font-size: clamp(2.75rem, 11.5vw, 3.75rem) !important;
+    line-height: 1.06 !important;
+  }
+
+  .statement-copy p {
+    font-size: 0.98rem !important;
+    line-height: 1.7 !important;
+  }
+
+  .audience-line {
+    margin-top: 3rem !important;
+  }
+}
