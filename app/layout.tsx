@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./mobile-fixes.css";
 import ScrollBreathRail from "./ScrollBreathRail";
 
 const siteUrl = "https://www.project-exhale.co.nz";
