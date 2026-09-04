@@ -74,14 +74,15 @@ export default function OpenGraphImage() {
               </div>
               <div
                 style={{
+                  display: "flex",
+                  flexDirection: "column",
                   fontFamily: "Georgia, Times New Roman, serif",
                   fontSize: 76,
                   lineHeight: 0.98,
                   letterSpacing: "-0.045em",
                 }}
               >
-                Pressure is inevitable.
-                <br />
+                <span>Pressure is inevitable.</span>
                 <span style={{ color: "#a8b9a2", fontStyle: "italic" }}>Staying there isn’t.</span>
               </div>
               <div
